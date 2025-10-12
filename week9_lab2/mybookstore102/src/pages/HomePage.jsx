@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon, BookOpenIcon, TruckIcon, ShieldCheckIcon } from '@heroicons/react/outline';
 import BookCard from '../components/BookCard';
+import FeaturedBooks from '../components/FeaturedBooks';
 
 const HomePage = () => {
   const featuredBooks = [
@@ -11,7 +12,7 @@ const HomePage = () => {
       author: 'F. Scott Fitzgerald', 
       price: 299, 
       originalPrice: 399,
-      coverImage: '/images/books/gatsby.jpg',
+      coverImage: '/images//books/gatsby.jpg',
       category: 'Classic',
       rating: 4.5,
       reviews: 234,
@@ -33,7 +34,17 @@ const HomePage = () => {
       title: 'To Kill a Mockingbird', 
       author: 'Harper Lee', 
       price: 320, 
-      coverImage: '/images/books/1984.jpg',
+      coverImage: '/images/books/mockingbird.jpg',
+      category: 'Classic',
+      rating: 4.6,
+      reviews: 189
+    },
+    { 
+      id: 4, 
+      title: 'To Kill a Mockingbird', 
+      author: 'Harper Lee', 
+      price: 320, 
+      coverImage: '/images/books/mockingbird.jpg',
       category: 'Classic',
       rating: 4.6,
       reviews: 189
@@ -45,13 +56,14 @@ const HomePage = () => {
     { name: 'การ์ตูน', icon: '🎨', color: 'bg-rose-100', slug: 'comics' },
     { name: 'วิชาการ', icon: '🎓', color: 'bg-lime-100', slug: 'academic' },
     { name: 'จิตวิทยา', icon: '🧠', color: 'bg-indigo-100', slug: 'psychology' },
+    { name: 'กีฬา', icon: '⚽', color: 'bg-indigo-100', slug: 'sports' },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-viridian-600 to-green-700 text-white">
-        <div className="container mx-auto px-4 py-24 bg-green-800">
+      <section className="relative bg-gradient-to-r from-sky-400 to-green-700 text-black">
+        <div className="container mx-auto px-4 py-24">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
               ยินดีต้อนรับสู่ <span className="text-yellow-300">BookStore</span>
@@ -61,7 +73,7 @@ const HomePage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/books" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-black 
+                className="inline-flex items-center justify-center px-8 py-3 bg-white 
                 text-viridian-600 font-semibold rounded-lg hover:bg-gray-100 
                 transform hover:scale-105 transition-all duration-200">
                 เลือกซื้อหนังสือ
@@ -69,7 +81,7 @@ const HomePage = () => {
               </Link>
               <Link to="/categories" 
                 className="inline-flex items-center justify-center px-8 py-3 
-                border-2 border-white text-white font-semibold rounded-lg 
+                border-2 border-white text-black font-semibold rounded-lg 
                 hover:bg-white hover:text-viridian-600 transition-all duration-200">
                 ดูหมวดหมู่ทั้งหมด
               </Link>
@@ -146,6 +158,7 @@ const HomePage = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">หนังสือแนะนำ</h2>
+          <FeaturedBooks />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredBooks.map(book => (
               <BookCard key={book.id} book={book} />
