@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:alpine
+    image:  nginx:alpine
     ports:
       - "80:80"
     volumes:
@@ -8,4 +8,3 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
-    

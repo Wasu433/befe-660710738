@@ -28,7 +28,7 @@ const SearchBar = ({ onSearch, placeholder = "ค้นหาหนังสื�
         <button
           type="submit"
           className="absolute right-2 top-1/2 transform -translate-y-1/2 
-            px-4 py-1.5 bg-viridian-600 text-white rounded-md hover:bg-viridian-700 
+            px-4 py-1.5 bg-sky-600 text-white rounded-md hover:bg-viridian-700 
             transition-colors duration-200 text-sm font-medium"
         >
           ค้นหา

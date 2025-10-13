@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BookCard from './BookCard';
 
 const FeaturedBooks = () => {
-  // กำหนด State สำหรับจัดการข้อมูล
+  // 🔹 สร้าง state สำหรับข้อมูลหนังสือ, โหลด, และ error
   const [featuredBooks, setFeaturedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,8 +11,8 @@ const FeaturedBooks = () => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
-        
-        // เรียก API เพื่อดึงข้อมูลหนังสือ
+
+        // 🔹 เรียก API จริง (proxy จะชี้ไปที่ backend)
         const response = await fetch('/api/v1/books/');
 
         if (!response.ok) {
@@ -21,57 +21,53 @@ const FeaturedBooks = () => {
 
         const data = await response.json();
 
-        // สุ่มหนังสือ 3 เล่ม
+        // 🔹 สุ่มหนังสือมา 3 เล่ม
         const shuffled = [...data].sort(() => 0.5 - Math.random());
         const selected = shuffled.slice(0, 3);
 
         setFeaturedBooks(selected);
         setError(null);
-        
       } catch (err) {
-        setError(err.message);
         console.error('Error fetching books:', err);
-        
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    // เรียกใช้ฟังก์ชันดึงข้อมูล
     fetchBooks();
-  }, []); // [] = dependency array ว่าง = รันครั้งเดียว
+  }, []);
 
-  // กรณีกำลังโหลดข้อมูล
+  // 🔹 แสดงสถานะ Loading
   if (loading) {
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="text-center py-8 col-span-full">
-          Loading...
-        </div>
+      <div className="text-center py-8 col-span-full text-gray-600">
+        กำลังโหลดข้อมูลหนังสือ...
       </div>
     );
   }
 
-  // กรณีเกิดข้อผิดพลาด
+  // 🔹 แสดง Error ถ้าเกิดปัญหา
   if (error) {
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="text-center py-8 col-span-full text-red-600">
-          Error: {error}
-        </div>
+      <div className="text-center py-8 col-span-full text-red-600">
+        Error: {error}
       </div>
     );
   }
 
-  // กรณีแสดงผลข้อมูลปกติ
+  // 🔹 แสดงรายการหนังสือแนะนำ
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {featuredBooks.map(book => (
-        <BookCard 
-          key={book.id} 
-          book={book} 
-        />
-      ))}
+      {featuredBooks.length > 0 ? (
+        featuredBooks.map((book) => (
+          <BookCard key={book.id} book={book} />
+        ))
+      ) : (
+        <div className="text-center py-8 col-span-full text-gray-600">
+          ไม่มีข้อมูลหนังสือแนะนำ
+        </div>
+      )}
     </div>
   );
 };
