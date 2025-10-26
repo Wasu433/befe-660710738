@@ -16,7 +16,7 @@ CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_active ON users(is_active);
 
-- Admin user (password: admin123)
+-- Admin user (password: admin123)
 INSERT INTO users (username, email, password_hash, email_verified)
 VALUES (
     'admin',

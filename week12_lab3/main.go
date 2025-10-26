@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"q"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // กำหนด Claims structure
